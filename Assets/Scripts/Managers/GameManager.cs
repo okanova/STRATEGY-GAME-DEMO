@@ -13,10 +13,20 @@ public class GameManager : MonoSingleton<GameManager>
   
     private IEnumerator Start()
     {
-        Environment tempEnvironment = Instantiate(environment);
-        tempEnvironment.CreateMap();
+        PoolManager.Instance.EnablePoolObjects();
+        environment = Instantiate(environment);
+        environment.CreateMap();
         camera.CameraDivergence(GridManager.Instance.gridSettings.coordinateCount);
         yield return null;
-        GridManager.Instance.AddCell(tempEnvironment.grid);
+        GridManager.Instance.AddCell(environment.grid);
+        InputManager.Instance.MouseEnabled();
     }
+}
+
+public enum BuildingType
+{
+    Barrack,
+    House,
+    PowerPlant,
+    SoldierUnit
 }

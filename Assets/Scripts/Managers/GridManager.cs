@@ -11,7 +11,7 @@ public class GridManager : MonoSingleton<GridManager>
     
     public CoordinateClass[] coordinateX = new CoordinateClass[100];
 
-    public List<Cell> cells;
+    private List<Cell> _paintedCells = new List<Cell>();
     
     public void AddCell(Transform parent)
     {
@@ -21,15 +21,56 @@ public class GridManager : MonoSingleton<GridManager>
         {
             for (int y = 0; y < gridSettings.coordinateCount.y; y++)
             {
-                tempCell = Instantiate(gridSettings.cell);
+                tempCell = PoolManager.Instance.CellPool.Get().GetComponent<Cell>();
                 tempCell.transform.SetParent(parent);
                 tempCell.transform.localPosition = new Vector2(x, y);
                 coordinateX[x].coordinateY[y] = tempCell;
-                cells.Add(tempCell);
+                tempCell.SetFirstColor();
+                tempCell.name = x + "_" + y;
             }
         }
     }
+
+    public bool CellIsEmpty(Vector2Int cellPos)
+    {
+        if (cellPos.x < 0 || cellPos.x >= gridSettings.coordinateCount.x || 
+            cellPos.y < 0 || cellPos.y >= gridSettings.coordinateCount.y)
+            return false;
+        
+        _paintedCells.Add(coordinateX[cellPos.x].coordinateY[cellPos.y]);
+        coordinateX[cellPos.x].coordinateY[cellPos.y].ColorEnable();
+       
+        if (coordinateX[cellPos.x].coordinateY[cellPos.y].isEmpty)
+            return true;
+        
+        return false;
+    }
+
+
+    public void BuildOnCell()
+    {
+        foreach (var cell in _paintedCells)
+        {
+            cell.ColorDisable();
+            cell.isEmpty = false;
+        }
+        
+        _paintedCells.Clear();
+    }
+
+    public void ClearCellList()
+    {
+        if (_paintedCells.Count == 0) return;
+        
+        foreach (var cell in _paintedCells)
+        {
+            cell.ColorDisable();
+        }
+        
+        _paintedCells.Clear();
+    }
 }
+
 
 [Serializable]
 public class CoordinateClass

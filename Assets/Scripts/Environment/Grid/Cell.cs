@@ -5,6 +5,31 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    [SerializeField] private GameObject cellModel;
+    [SerializeField] private GameObject _cellModel;
+    [SerializeField] private Renderer _renderer;
+    private Color _firstColor;
+    
+    public bool isEmpty;
 
+    public void SetFirstColor()
+    {
+        _firstColor = _renderer.material.GetColor("_Color");
+        isEmpty = true;
+    }
+    
+    
+    public void ColorEnable()
+    {
+        if (isEmpty)
+            _renderer.material.SetColor("_Color", GridManager.Instance.gridSettings.canBuildColor);
+        else
+            _renderer.material.SetColor("_Color", GridManager.Instance.gridSettings.cantBuildColor);
+    }
+
+    public void ColorDisable()
+    {
+        _renderer.material.SetColor("_Color", _firstColor);
+    }
+    
+    
 }
