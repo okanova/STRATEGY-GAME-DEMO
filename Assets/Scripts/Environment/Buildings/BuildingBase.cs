@@ -3,12 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingBase : MonoBehaviour
+public abstract class BuildingBase : MonoBehaviour
 {
    [SerializeField] private List<Vector2> _nestPositionList;
+   [SerializeField] private BuildingType _type;
 
    private bool _correctPoint;
-   
+
+
+   #region Create & Set
+
    public void BuildingSearcherEnabled()
    {
       StartCoroutine("BuildingMovementRoutine");
@@ -27,6 +31,7 @@ public class BuildingBase : MonoBehaviour
       
       if (!_correctPoint) Destroy(gameObject);
    }
+   
 
    private IEnumerator CheckCellsSituationtRoutine()
    {
@@ -41,7 +46,7 @@ public class BuildingBase : MonoBehaviour
          
          yield return null;
 
-        GridManager.Instance.ClearCellList();
+         GridManager.Instance.ClearCellList();
       }
    }
 
@@ -70,5 +75,12 @@ public class BuildingBase : MonoBehaviour
       }
 
       return count;
+   }
+
+   #endregion
+
+   private void OnMouseUp()
+   {
+       UIManager.Instance.OpenPanel(_type);
    }
 }

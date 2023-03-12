@@ -6,7 +6,7 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
     [SerializeField] private GameObject _cellModel;
-    [SerializeField] private Renderer _renderer;
+    [SerializeField] private SpriteRenderer _renderer;
     private Color _firstColor;
     
     public bool isEmpty;
