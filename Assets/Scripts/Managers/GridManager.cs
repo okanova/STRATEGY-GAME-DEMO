@@ -46,6 +46,13 @@ public class GridManager : MonoSingleton<GridManager>
         return false;
     }
 
+    public void NotCorrectPoint() //if every cells not empty, all cells will be red
+    {
+        foreach (var cell in _paintedCells)
+        {
+            cell.ColorRed();
+        }
+    }
 
     public void BuildOnCell()
     {

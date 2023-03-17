@@ -5,31 +5,43 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-    [SerializeField] private GameObject _cellModel;
-    [SerializeField] private SpriteRenderer _renderer;
-    private Color _firstColor;
-    
+    [SerializeField] private GameObject[] _cellModels;
+
     public bool isEmpty;
 
+    private Color[] _colors = new Color[3];
     public void SetFirstColor()
     {
-        _firstColor = _renderer.material.GetColor("_Color");
         isEmpty = true;
+        ColorDisable();
     }
     
     
     public void ColorEnable()
     {
         if (isEmpty)
-            _renderer.material.SetColor("_Color", GridManager.Instance.gridSettings.canBuildColor);
+           OpenOneCell(1);
         else
-            _renderer.material.SetColor("_Color", GridManager.Instance.gridSettings.cantBuildColor);
+            OpenOneCell(2);
+    }
+
+    public void ColorRed()
+    {
+        OpenOneCell(2);
     }
 
     public void ColorDisable()
     {
-        _renderer.material.SetColor("_Color", _firstColor);
+        OpenOneCell(0);
     }
-    
-    
+
+    private void OpenOneCell(int count)
+    {
+        foreach (var cell in _cellModels)
+        {
+            cell.SetActive(false);
+        }
+        
+        _cellModels[count].SetActive(true);
+    }
 }

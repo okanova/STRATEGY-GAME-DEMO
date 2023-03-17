@@ -19,6 +19,7 @@ public class GameManager : MonoSingleton<GameManager>
         camera.CameraDivergence(GridManager.Instance.gridSettings.coordinateCount);
         yield return null;
         GridManager.Instance.AddCell(environment.grid);
+        UIManager.Instance.UIEnabled();
         InputManager.Instance.MouseEnabled();
     }
 }

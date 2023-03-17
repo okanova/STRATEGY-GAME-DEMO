@@ -5,33 +5,45 @@ using UnityEngine;
 
 public abstract class BuildingBase : MonoBehaviour
 {
-   [SerializeField] private List<Vector2> _nestPositionList;
+   [SerializeField] protected List<Vector2> _nestPositionList;
+   [SerializeField] protected Vector2 center;
+   [SerializeField] protected GameObject[] _models;
    [SerializeField] private BuildingType _type;
-
+   
    private bool _correctPoint;
 
+   #region Create & Movement & SetOrDestroy
 
-   #region Create & Set
-
-   public void BuildingSearcherEnabled()
+   public void BuildingMovementEnabled()
    {
+      _models[0].SetActive(false);
+      _models[1].SetActive(true);
+      
+      RotationEnabled();
       StartCoroutine("BuildingMovementRoutine");
       StartCoroutine("CheckCellsSituationtRoutine");
    }
 
-   public void BuildingSearcherDisabled()
+   public void BuildingMovementDisabled()
    {
+      RotationDisabled();
       StopCoroutine("BuildingMovementRoutine");
       StopCoroutine("CheckCellsSituationtRoutine");
       
-      GridManager.Instance.BuildOnCell();
-
-      if (_correctPoint)
+      if (_correctPoint) //SET 
+      {
+         _models[0].SetActive(true);
+         _models[1].SetActive(false);
+         
+         GridManager.Instance.BuildOnCell();
          transform.localPosition = Vector3Int.RoundToInt(transform.localPosition);
-      
-      if (!_correctPoint) Destroy(gameObject);
+      }
+      else //DESTROY
+      {
+         GridManager.Instance.ClearCellList();
+         Destroy(gameObject);
+      }
    }
-   
 
    private IEnumerator CheckCellsSituationtRoutine()
    {
@@ -44,6 +56,9 @@ public abstract class BuildingBase : MonoBehaviour
          else 
             _correctPoint = false;
          
+         if (!_correctPoint)
+            GridManager.Instance.NotCorrectPoint();
+            
          yield return null;
 
          GridManager.Instance.ClearCellList();
@@ -78,9 +93,29 @@ public abstract class BuildingBase : MonoBehaviour
    }
 
    #endregion
+   
+   #region Rotation
 
+   private void RotationEnabled()
+   {
+      InputManager.OnRightMouseDownEvent += RotationNinetyDegrees;
+   }
+
+   private void RotationDisabled()
+   {
+      InputManager.OnRightMouseDownEvent -= RotationNinetyDegrees;
+   }
+
+
+   public virtual void RotationNinetyDegrees()
+   {
+     
+   }
+
+   #endregion
+   
    private void OnMouseUp()
    {
-       UIManager.Instance.OpenPanel(_type);
+      UIManager.Instance.OpenPanel(_type);
    }
 }

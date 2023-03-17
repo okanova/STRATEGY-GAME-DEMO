@@ -50,17 +50,17 @@ public class PoolManager : MonoSingleton<PoolManager>
     
     private GameObject OnCreateHouse()
     {
-        return Instantiate(_barrack);
+        return Instantiate(_house);
     }
     
     private GameObject OnCreatePowePlant()
     {
-        return Instantiate(_barrack);
+        return Instantiate(_powerPlant);
     }
     
     private GameObject OnCreateSoldierUnit()
     {
-        return Instantiate(_barrack);
+        return Instantiate(_soldierUnit);
     }
 
     private void OnGetObject(GameObject obj)

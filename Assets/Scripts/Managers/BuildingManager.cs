@@ -10,12 +10,13 @@ public class BuildingManager : MonoSingleton<BuildingManager>
     public List<BuildingBase> buildings;
     
     private BuildingBase _tempBuilding;
+
+    public BuildingSettings _buildingSettings;
+    
     
     public void CreateNewBuilding(BuildingType type)
     {
-        
-        BuildingBase building()
-        => (type) switch
+        BuildingBase Building() => (type) switch
         {
             (BuildingType.Barrack) => PoolManager.Instance.BarrackPool.Get().GetComponent<BuildingBase>(),
             (BuildingType.House) => PoolManager.Instance.HousePool.Get().GetComponent<BuildingBase>(),
@@ -24,7 +25,7 @@ public class BuildingManager : MonoSingleton<BuildingManager>
             (_) => null
         };
 
-        _tempBuilding = building();
+        _tempBuilding = Building();
         buildings.Add(_tempBuilding);
         BuildingEnabled();
     }
@@ -33,14 +34,15 @@ public class BuildingManager : MonoSingleton<BuildingManager>
     {
         _tempBuilding.transform.SetParent(GameManager.Instance.environment.build);
         GameManager.Instance.camera.SideCamerasActiveChange(false);
-        _tempBuilding.BuildingSearcherEnabled();
-        InputManager.OnMouseUpEvent += BuildingDisabled;
+        UIManager.Instance.ClosePanel();
+        _tempBuilding.BuildingMovementEnabled();
+        InputManager.OnLeftMouseUpEvent += BuildingDisabled;
     }
 
     private void BuildingDisabled()
     {
         GameManager.Instance.camera.SideCamerasActiveChange(true);
-        _tempBuilding.BuildingSearcherDisabled();
-        InputManager.OnMouseUpEvent -= BuildingDisabled;
+        _tempBuilding.BuildingMovementDisabled();
+        InputManager.OnLeftMouseUpEvent -= BuildingDisabled;
     }
 }
