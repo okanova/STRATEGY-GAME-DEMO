@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: CameraSettings
   m_EditorClassIdentifier: 
   divergenceValue: 0.5
-  firstPosition: {x: 0, y: 0, z: -1}

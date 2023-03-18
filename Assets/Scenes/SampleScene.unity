@@ -670,7 +670,7 @@ MonoBehaviour:
     text: Generates resources
   - type: 3
     imageSprite: {fileID: 21300000, guid: e039cb628cbc7dd4bacabd3df3c35fa0, type: 3}
-    productions: 0100000002000000
+    productions: 0200000001000000
     text: Soldier researching
   buildingImage: {fileID: 608146645}
   informationText: {fileID: 1542285082}

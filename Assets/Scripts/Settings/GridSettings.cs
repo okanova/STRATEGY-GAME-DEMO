@@ -7,6 +7,4 @@ public class GridSettings : ScriptableObject
 {
    public Cell cell;
    public Vector2Int coordinateCount;
-   public Color canBuildColor;
-   public Color cantBuildColor;
 }

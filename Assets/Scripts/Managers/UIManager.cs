@@ -38,6 +38,9 @@ public class UIManager : MonoSingleton<UIManager>
    public void OpenPanel(BuildingType type)
    {
        ClosePanel();
+       
+       RectTransform rect;
+       SoldierButtonView soldierButtonView = null;
 
        foreach (var infP in informationPanel)
       {
@@ -45,28 +48,36 @@ public class UIManager : MonoSingleton<UIManager>
           {
               buildingImage.sprite = infP.imageSprite;
               informationText.text = infP.text;
-
-              RectTransform rect;
+              
 
               foreach (var production in infP.productions)
               {
-                  SoldierButtonView SoldierButton() => (production) switch
+                  switch (production)
                   {
-                      (SoldierType.Level1) => PoolManager.Instance.SoldierLevel1ButtonPool.Get(),
-                      (SoldierType.Level2) => PoolManager.Instance.SoldierLevel2ButtonPool.Get(),
-                      (SoldierType.Level3) => PoolManager.Instance.SoldierLevel3ButtonPool.Get(),
-                      (_) => null
-                  };
+                      case SoldierType.Level1:
+                          soldierButtonView =  PoolManager.Instance.SoldierLevel1ButtonPool.Get();
+                          break;
+                      case SoldierType.Level2:
+                          soldierButtonView =  PoolManager.Instance.SoldierLevel2ButtonPool.Get();
+                          break;
+                      case SoldierType.Level3:
+                          soldierButtonView =  PoolManager.Instance.SoldierLevel3ButtonPool.Get();
+                          break;
+                      default:
+                          break;
+                  }
                   
-                  SoldierButton().transform.SetParent(_soldierParent);
-                  rect = SoldierButton().GetComponent<RectTransform>();
+                  if (!soldierButtonView) return;
+                  
+                  soldierButtonView.transform.SetParent(_soldierParent);
+                  rect = soldierButtonView.GetComponent<RectTransform>();
                   rect.localScale = Vector3.one;
                   rect.localPosition = new Vector3(rect.localPosition.x, rect.localPosition.y, 0);
               }
           }
       }
    }
-   
+
 
    public void ClosePanel()
    {
