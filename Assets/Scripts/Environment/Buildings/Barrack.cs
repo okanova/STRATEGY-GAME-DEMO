@@ -6,17 +6,17 @@ using UnityEngine;
 public class Barrack : BuildingBase
 {
     [SerializeField] private Vector2 _door;
-
-    public override void RotationNinetyDegrees()
+    Vector2 _tempPos;
+    
+    protected override void RotationNinetyDegrees()
     {
-        Vector2 tempPos;
         _models[0].transform.eulerAngles += Vector3.forward * 90;
         _models[1].transform.eulerAngles += Vector3.forward * 90;
-        for (int i = 0; i < _nestPositionList.Count; i++)
+        for (int i = 0; i < _nestPositionList.Length; i++)
         {
-            tempPos = _nestPositionList[i] - center;
-            _nestPositionList[i] = new Vector2(-tempPos.y, tempPos.x);
-            _nestPositionList[i] += center;
+            _tempPos = _nestPositionList[i].nestPosition - center;
+            _nestPositionList[i].nestPosition = new Vector2(-_tempPos.y, _tempPos.x);
+            _nestPositionList[i].nestPosition += center;
         }
     }
 }

@@ -19,6 +19,7 @@ public class GameManager : MonoSingleton<GameManager>
         camera.CameraDivergence(GridManager.Instance.gridSettings.coordinateCount);
         yield return null;
         GridManager.Instance.AddCell(environment.grid);
+        camera.SideCamerasActiveChange(true);
         UIManager.Instance.UIEnabled();
         InputManager.Instance.MouseEnabled();
     }
@@ -30,4 +31,11 @@ public enum BuildingType
     House,
     PowerPlant,
     SoldierUnit
+}
+
+public enum SoldierType
+{
+    Level1, 
+    Level2,
+    Level3
 }

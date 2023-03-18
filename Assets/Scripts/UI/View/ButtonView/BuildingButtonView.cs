@@ -9,5 +9,4 @@ public class BuildingButtonView : BaseButtonView
     {
         BuildingManager.Instance.CreateNewBuilding(_buildingType);
     }
-    
 }

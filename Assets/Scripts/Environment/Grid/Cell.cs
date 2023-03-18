@@ -8,11 +8,13 @@ public class Cell : MonoBehaviour
     [SerializeField] private GameObject[] _cellModels;
 
     public bool isEmpty;
+    public bool walkable;
 
     private Color[] _colors = new Color[3];
     public void SetFirstColor()
     {
         isEmpty = true;
+        walkable = true;
         ColorDisable();
     }
     

@@ -21,7 +21,7 @@ public class GridManager : MonoSingleton<GridManager>
         {
             for (int y = 0; y < gridSettings.coordinateCount.y; y++)
             {
-                tempCell = PoolManager.Instance.CellPool.Get().GetComponent<Cell>();
+                tempCell = PoolManager.Instance.CellPool.Get();
                 tempCell.transform.SetParent(parent);
                 tempCell.transform.localPosition = new Vector2(x, y);
                 coordinateX[x].coordinateY[y] = tempCell;

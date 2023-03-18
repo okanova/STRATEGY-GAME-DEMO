@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class BuildingBase : MonoBehaviour
 {
-   [SerializeField] protected List<Vector2> _nestPositionList;
+   [SerializeField] protected NestPositionClass[] _nestPositionList;
    [SerializeField] protected Vector2 center;
    [SerializeField] protected GameObject[] _models;
    [SerializeField] private BuildingType _type;
@@ -51,7 +51,7 @@ public abstract class BuildingBase : MonoBehaviour
       {
          int count = FindEmptyCellsCount();
          
-         if (count == _nestPositionList.Count)
+         if (count == _nestPositionList.Length)
             _correctPoint = true;
          else 
             _correctPoint = false;
@@ -83,7 +83,7 @@ public abstract class BuildingBase : MonoBehaviour
       int count = 0;
       foreach (var pos in _nestPositionList)
       {
-         if (GridManager.Instance.CellIsEmpty(Vector2Int.RoundToInt((Vector2) transform.localPosition + pos)))
+         if (GridManager.Instance.CellIsEmpty(Vector2Int.RoundToInt((Vector2) transform.localPosition + pos.nestPosition)))
          {
             count++;
          }
@@ -107,7 +107,7 @@ public abstract class BuildingBase : MonoBehaviour
    }
 
 
-   public virtual void RotationNinetyDegrees()
+   protected virtual void RotationNinetyDegrees()
    {
      
    }
@@ -118,4 +118,13 @@ public abstract class BuildingBase : MonoBehaviour
    {
       UIManager.Instance.OpenPanel(_type);
    }
+}
+
+
+[Serializable]
+public class NestPositionClass
+{
+   public Vector2 nestPosition;
+   public bool walkable;
+   public bool spawnPoint;
 }

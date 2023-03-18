@@ -18,10 +18,10 @@ public class BuildingManager : MonoSingleton<BuildingManager>
     {
         BuildingBase Building() => (type) switch
         {
-            (BuildingType.Barrack) => PoolManager.Instance.BarrackPool.Get().GetComponent<BuildingBase>(),
-            (BuildingType.House) => PoolManager.Instance.HousePool.Get().GetComponent<BuildingBase>(),
-            (BuildingType.PowerPlant) => PoolManager.Instance.PowerPlantPool.Get().GetComponent<BuildingBase>(),
-            (BuildingType.SoldierUnit) => PoolManager.Instance.SoldierUnitPool.Get().GetComponent<BuildingBase>(),
+            (BuildingType.Barrack) => PoolManager.Instance.BarrackPool.Get(),
+            (BuildingType.House) => PoolManager.Instance.HousePool.Get(),
+            (BuildingType.PowerPlant) => PoolManager.Instance.PowerPlantPool.Get(),
+            (BuildingType.SoldierUnit) => PoolManager.Instance.SoldierUnitPool.Get(),
             (_) => null
         };
 
