@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Extensions;
 using Settings;
+using Soldiers;
+using UnityEngine;
 
 namespace Managers
 {
@@ -11,7 +13,8 @@ namespace Managers
         private BuildingBase _tempBuilding;
 
         public BuildingSettings buildingSettings;
-    
+
+        public Barrack spawnerBarrack;
     
         public void CreateNewBuilding(BuildingType type)
         {
@@ -43,6 +46,28 @@ namespace Managers
             GameManager.Instance.camera.SideCamerasActiveChange(true);
             _tempBuilding.BuildingMovementDisabled();
             InputManager.OnLeftMouseUpEvent -= BuildingDisabled;
+        }
+
+        public void CreateSoldier(SoldierType type)
+        {
+            SoldierBase Soldier() => (type) switch
+            {
+                (SoldierType.Level1) => PoolManager.Instance.Level1SoldierPool.Get(),
+                (SoldierType.Level2) => PoolManager.Instance.Level2SoldierPool.Get(),
+                (SoldierType.Level3) => PoolManager.Instance.Level3SoldierPool.Get(),
+                (_) => null
+            };
+
+            foreach (var nest in spawnerBarrack.nestPositionList)
+            {
+                if (nest.spawnPoint)
+                {
+                    Soldier().transform.position = GridManager.Instance.coordinateX[Mathf.RoundToInt
+                            (nest.nestPosition.x + spawnerBarrack.transform.localPosition.x)].coordinateY[
+                            Mathf.RoundToInt(nest.nestPosition.y + spawnerBarrack.transform.localPosition.y)]
+                        .transform.position;
+                }
+            }
         }
     }
 }

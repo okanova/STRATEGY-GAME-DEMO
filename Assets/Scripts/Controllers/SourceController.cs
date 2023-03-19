@@ -13,20 +13,20 @@ namespace Controllers
 
         public SourceModel SourceModel { get; private set; }
 
-        public SourceController(GoldView goldView, PopulationView populationView, SourceModel sourceModel)
+        public SourceController(GoldView goldView, PopulationView populationView)
         {
             PlayerPrefs.DeleteAll();
             
             GoldView = goldView;
             PopulationView = populationView;
-            SourceModel = sourceModel;
+            SourceModel = Resources.Load<SourceModel>("SourceModel");
             
             SourceModel.currentMoney = PlayerPrefs.GetInt(PlayerPrefsNames.MONEY);
             
             if (PlayerPrefs.GetInt(PlayerPrefsNames.FIRST_GAME) == 0)
             {
                 PlayerPrefs.SetInt(PlayerPrefsNames.FIRST_GAME, 1);
-                SourceModel.currentMoney = 200;
+                SourceModel.currentMoney = 1000;
             }
             
             SourceModel.currentPopulation = PlayerPrefs.GetInt(PlayerPrefsNames.CURRENT_POPULATION);

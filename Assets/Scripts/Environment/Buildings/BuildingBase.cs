@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class BuildingBase : MonoBehaviour, IGoldChanger
 {
-   [SerializeField] protected NestPositionClass[] _nestPositionList;
+   public NestPositionClass[] nestPositionList;
    [SerializeField] protected Vector2 center;
    [SerializeField] protected GameObject[] _models;
    [SerializeField] private BuildingType _buildingType;
@@ -66,7 +66,7 @@ public abstract class BuildingBase : MonoBehaviour, IGoldChanger
       {
          int count = FindEmptyCellsCount();
          
-         if (count == _nestPositionList.Length)
+         if (count == nestPositionList.Length)
             _correctPoint = true;
          else 
             _correctPoint = false;
@@ -96,7 +96,7 @@ public abstract class BuildingBase : MonoBehaviour, IGoldChanger
    private int FindEmptyCellsCount()
    {
       int count = 0;
-      foreach (var pos in _nestPositionList)
+      foreach (var pos in nestPositionList)
       {
          if (GridManager.Instance.CellIsEmpty(Vector2Int.RoundToInt((Vector2) transform.localPosition + pos.nestPosition)))
          {
@@ -129,7 +129,7 @@ public abstract class BuildingBase : MonoBehaviour, IGoldChanger
 
    #endregion
    
-   private void OnMouseUp()
+   protected virtual void OnMouseUp()
    {
       UIManager.Instance.OpenPanel(_buildingType);
    }

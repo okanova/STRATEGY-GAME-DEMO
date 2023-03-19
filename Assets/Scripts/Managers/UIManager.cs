@@ -28,16 +28,17 @@ namespace Managers
    
         [SerializeField] private GoldView _goldView;
         [SerializeField] private PopulationView _populationView;
-   
-        [SerializeField] private SourceModel _sourceModel;
+
         public SourceController SourceController { get; private set; }
 
         public void UIEnabled()
         {
             _standardSprite = buildingImage.sprite;
-            SourceController = new SourceController(_goldView, _populationView, _sourceModel);
-            GoldInvoke(_sourceModel.currentMoney);
-            PopulationInvoke(_sourceModel.currentPopulation, _sourceModel.maxPopulation);
+           
+            SourceController = new SourceController(_goldView, _populationView);
+            GoldInvoke(SourceController.SourceModel.currentMoney);
+            PopulationInvoke(SourceController.SourceModel.currentPopulation,
+                SourceController.SourceModel.maxPopulation);
         }
 
         public void GoldInvoke(int money)
@@ -53,7 +54,7 @@ namespace Managers
         public void OpenPanel(BuildingType type)
         {
             ClosePanel();
-       
+
             RectTransform rect;
             SoldierButtonView soldierButtonView = null;
 
@@ -63,27 +64,27 @@ namespace Managers
                 {
                     buildingImage.sprite = infP.imageSprite;
                     informationText.text = infP.text;
-              
-
+                    
                     foreach (var production in infP.productions)
                     {
                         switch (production)
                         {
                             case SoldierType.Level1:
-                                soldierButtonView =  PoolManager.Instance.SoldierLevel1ButtonPool.Get();
+                                soldierButtonView = PoolManager.Instance.SoldierLevel1ButtonPool.Get();
                                 break;
                             case SoldierType.Level2:
-                                soldierButtonView =  PoolManager.Instance.SoldierLevel2ButtonPool.Get();
+                                soldierButtonView = PoolManager.Instance.SoldierLevel2ButtonPool.Get();
                                 break;
                             case SoldierType.Level3:
-                                soldierButtonView =  PoolManager.Instance.SoldierLevel3ButtonPool.Get();
+                                soldierButtonView = PoolManager.Instance.SoldierLevel3ButtonPool.Get();
                                 break;
                             default:
                                 break;
                         }
                   
                         if (!soldierButtonView) return;
-                  
+
+                        soldierButtonView.isResearcher = type == BuildingType.SoldierUnit;
                         soldierButtonView.transform.SetParent(_soldierParent);
                         rect = soldierButtonView.GetComponent<RectTransform>();
                         rect.localScale = Vector3.one;
@@ -92,8 +93,7 @@ namespace Managers
                 }
             }
         }
-
-
+        
         public void ClosePanel()
         {
             buildingImage.sprite = _standardSprite;
@@ -120,7 +120,21 @@ namespace Managers
                         break;
                 }
             }
-       
+        }
+
+        public void Research(SoldierType soldierType)
+        {
+            foreach (var infP in informationPanel)
+            {
+                if (infP.type == BuildingType.PowerPlant)
+                {
+                    infP.productions.Remove(soldierType);
+                }
+                else if (infP.type == BuildingType.Barrack)
+                {
+                    infP.productions.Add(soldierType);
+                }
+            }
         }
     }
 

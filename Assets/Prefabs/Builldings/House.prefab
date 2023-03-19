@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d45ea01fa0a5242ba97ea3593bfb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nestPositionList:
+  nestPositionList:
   - nestPosition: {x: 0, y: 0}
     walkable: 0
     spawnPoint: 0

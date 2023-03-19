@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine;
 
 
@@ -10,11 +11,18 @@ public class Barrack : BuildingBase
     {
         _models[0].transform.eulerAngles += Vector3.forward * 90;
         _models[1].transform.eulerAngles += Vector3.forward * 90;
-        for (int i = 0; i < _nestPositionList.Length; i++)
+        for (int i = 0; i < nestPositionList.Length; i++)
         {
-            _tempPos = _nestPositionList[i].nestPosition - center;
-            _nestPositionList[i].nestPosition = new Vector2(-_tempPos.y, _tempPos.x);
-            _nestPositionList[i].nestPosition += center;
+            _tempPos = nestPositionList[i].nestPosition - center;
+            nestPositionList[i].nestPosition = new Vector2(-_tempPos.y, _tempPos.x);
+            nestPositionList[i].nestPosition += center;
         }
+    }
+
+    protected override void OnMouseUp()
+    {
+        base.OnMouseUp();
+
+        BuildingManager.Instance.spawnerBarrack = this;
     }
 }

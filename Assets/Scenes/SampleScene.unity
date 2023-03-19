@@ -316,6 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildings: []
   buildingSettings: {fileID: 11400000, guid: 2f26b193c120d7548bbf9b5351751c3d, type: 2}
+  spawnerBarrack: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +678,6 @@ MonoBehaviour:
   _soldierParent: {fileID: 1437050932}
   _goldView: {fileID: 1618350598}
   _populationView: {fileID: 1538800997}
-  _sourceModel: {fileID: 4991077686834930657, guid: 759d819f93f17ac4f834199090189a48, type: 3}
 --- !u!1 &1000502128
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,9 +828,9 @@ MonoBehaviour:
   _house: {fileID: 3742619876741652915, guid: e9aefbc2af6d08e4384239f14f3de5a8, type: 3}
   _powerPlant: {fileID: 3842055211655094983, guid: 69cd9d0fe3d184b4f822550d0787cd56, type: 3}
   _soldierUnit: {fileID: 2933531404723218582, guid: 90808b7fd8ad93f44bc3a7c8ca09c316, type: 3}
-  _level1Soldier: {fileID: 547266404952729647, guid: 58ecdde18fcf84d4c82b8875f403a360, type: 3}
-  _level2Soldier: {fileID: 2500352824222510974, guid: 8e34eda892543534fbc341c7bb21b71e, type: 3}
-  _level3Soldier: {fileID: 4694425068062487738, guid: a456177eebe6f16428dcd9f86a6ae744, type: 3}
+  _level1Soldier: {fileID: 5225819734028087108, guid: 58ecdde18fcf84d4c82b8875f403a360, type: 3}
+  _level2Soldier: {fileID: 6547288560021221757, guid: 8e34eda892543534fbc341c7bb21b71e, type: 3}
+  _level3Soldier: {fileID: 4991785694842326802, guid: a456177eebe6f16428dcd9f86a6ae744, type: 3}
   _level1SoldierButton: {fileID: 2677966544114875124, guid: 5ad86e9bbe81a56439e13196dbf5bc0e, type: 3}
   _level2SoldierButton: {fileID: 471111715555155066, guid: 6dd9d23f9789a094ba2e5d237095ea01, type: 3}
   _level3SoldierButton: {fileID: 5998591215802686700, guid: c87207b0af60f68499d32d76fac58724, type: 3}
@@ -11387,6 +11387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f500135e3261554c8e98ddd9067530e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soldierSettings: {fileID: 11400000, guid: b745f450ffa69f04191d947ccd7b2c4d, type: 2}
 --- !u!1 &2142737347
 GameObject:
   m_ObjectHideFlags: 0
