@@ -4,38 +4,41 @@ using System.Collections.Generic;
 using Extensions;
 using UnityEngine;
 
-public class GameManager : MonoSingleton<GameManager>
+namespace Managers
 {
-    [Header("GAME OBJECTS")]
-    public Environment environment;
-    public CameraPositionCalculator camera;
+    public class GameManager : MonoSingleton<GameManager>
+    {
+        [Header("GAME OBJECTS")]
+        public Environment.Environment environment;
+        public CameraPositionCalculator camera;
     
   
-    private IEnumerator Start()
-    {
-        PoolManager.Instance.EnablePoolObjects();
-        environment = Instantiate(environment);
-        environment.CreateMap();
-        camera.CameraDivergence(GridManager.Instance.gridSettings.coordinateCount);
-        yield return null;
-        GridManager.Instance.AddCell(environment.grid);
-        camera.SideCamerasActiveChange(true);
-        UIManager.Instance.UIEnabled();
-        InputManager.Instance.MouseEnabled();
+        private IEnumerator Start()
+        {
+            PoolManager.Instance.EnablePoolObjects();
+            environment = Instantiate(environment);
+            environment.CreateMap();
+            camera.CameraDivergence(GridManager.Instance.gridSettings.coordinateCount);
+            yield return null;
+            GridManager.Instance.AddCell(environment.grid);
+            camera.SideCamerasActiveChange(true);
+            UIManager.Instance.UIEnabled();
+            InputManager.Instance.MouseEnabled();
+        }
     }
-}
 
-public enum BuildingType
-{
-    Barrack,
-    House,
-    PowerPlant,
-    SoldierUnit
-}
+    public enum BuildingType
+    {
+        Barrack,
+        House,
+        PowerPlant,
+        SoldierUnit
+    }
 
-public enum SoldierType
-{
-    Level1, 
-    Level2,
-    Level3
+    public enum SoldierType
+    {
+        Level1, 
+        Level2,
+        Level3
+    }
 }

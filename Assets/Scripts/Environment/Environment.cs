@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Environment : MonoBehaviour
+namespace Environment
 {
-    public Transform map;
-    public Transform grid;
-    public Transform build;
-    public GameObject mouseTarget;
-    public void CreateMap()
+    public class Environment : MonoBehaviour
     {
-        MouseTargetEnable(false);
-    }
+        public Transform map;
+        public Transform grid;
+        public Transform build;
+        public GameObject mouseTarget;
+        public void CreateMap()
+        {
+            MouseTargetEnable(false);
+        }
 
-    public void MouseTargetEnable(bool isActive)
-    {
+        public void MouseTargetEnable(bool isActive)
+        {
        
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Settings;
 using UnityEngine;
 
 public class CameraPositionCalculator : MonoBehaviour

@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildings: []
-  _buildingSettings: {fileID: 11400000, guid: 2f26b193c120d7548bbf9b5351751c3d, type: 2}
+  buildingSettings: {fileID: 11400000, guid: 2f26b193c120d7548bbf9b5351751c3d, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

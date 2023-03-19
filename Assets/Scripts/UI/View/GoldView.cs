@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GoldView : BaseSourceView
+namespace UI.View
 {
-    public override void SetSourceText(int current, int max = 0)
+    public class GoldView : BaseSourceView
     {
-        _sourceText.text = "" + current;
+        public override void SetSourceText(int current, int max = 0)
+        {
+            _sourceText.text = "" + current;
+        }
     }
 }

@@ -1,10 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using Environment.Grid;
 using UnityEngine;
 
-[CreateAssetMenu (fileName = nameof(GridSettings), menuName = "ScriptableObject/" + nameof(GridSettings))]
-public class GridSettings : ScriptableObject
+namespace Settings
 {
-   public Cell cell;
-   public Vector2Int coordinateCount;
+   [CreateAssetMenu (fileName = nameof(GridSettings), menuName = "ScriptableObject/" + nameof(GridSettings))]
+   public class GridSettings : ScriptableObject
+   {
+      public Cell cell;
+      public Vector2Int coordinateCount;
+   }
 }

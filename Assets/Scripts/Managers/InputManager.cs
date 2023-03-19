@@ -1,48 +1,50 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Extensions;
 using UnityEngine;
 
-public class InputManager : MonoSingleton<InputManager>
+namespace Managers
 {
-   public static Action OnLeftMouseDownEvent;
-   public static Action OnLeftMouseDragEvent;
-   public static Action OnLeftMouseUpEvent;
+   public class InputManager : MonoSingleton<InputManager>
+   {
+      public static Action OnLeftMouseDownEvent;
+      public static Action OnLeftMouseDragEvent;
+      public static Action OnLeftMouseUpEvent;
    
-   public static Action OnRightMouseDownEvent;
-   public static Action OnRightMouseDragEvent;
-   public static Action OnRightMouseUpEvent;
+      public static Action OnRightMouseDownEvent;
+      public static Action OnRightMouseDragEvent;
+      public static Action OnRightMouseUpEvent;
 
-   public void MouseEnabled()
-   {
-      StartCoroutine("MouseSituationRoutine");
-   }
-
-   private IEnumerator MouseSituationRoutine()
-   {
-      while (true)
+      public void MouseEnabled()
       {
-         #region Mouse Inputs
+         StartCoroutine("MouseSituationRoutine");
+      }
 
-         if (Input.GetMouseButtonDown(0))
-            OnLeftMouseDownEvent?.Invoke();
-         if (Input.GetMouseButton(0))
-            OnLeftMouseDragEvent?.Invoke();
-         if (Input.GetMouseButtonUp(0))
-            OnLeftMouseUpEvent?.Invoke();
+      private IEnumerator MouseSituationRoutine()
+      {
+         while (true)
+         {
+            #region Mouse Inputs
+
+            if (Input.GetMouseButtonDown(0))
+               OnLeftMouseDownEvent?.Invoke();
+            if (Input.GetMouseButton(0))
+               OnLeftMouseDragEvent?.Invoke();
+            if (Input.GetMouseButtonUp(0))
+               OnLeftMouseUpEvent?.Invoke();
          
-         if (Input.GetMouseButtonDown(1))
-            OnRightMouseDownEvent?.Invoke();
-         if (Input.GetMouseButton(1))
-            OnRightMouseDragEvent?.Invoke();
-         if (Input.GetMouseButtonUp(1))
-            OnRightMouseUpEvent?.Invoke();
+            if (Input.GetMouseButtonDown(1))
+               OnRightMouseDownEvent?.Invoke();
+            if (Input.GetMouseButton(1))
+               OnRightMouseDragEvent?.Invoke();
+            if (Input.GetMouseButtonUp(1))
+               OnRightMouseUpEvent?.Invoke();
 
-         #endregion
+            #endregion
         
          
-         yield return null;
+            yield return null;
+         }
       }
    }
 }

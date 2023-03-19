@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-
-public class PopulationView : BaseSourceView
+namespace UI.View
 {
-    public override void SetSourceText(int current, int max)
+    public class PopulationView : BaseSourceView
     {
-        _sourceText.text = current + "/" + max;
+        public override void SetSourceText(int current, int max)
+        {
+            _sourceText.text = current + "/" + max;
+        }
     }
 }

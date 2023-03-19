@@ -12,4 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67bedb39d8657a844a347e1c6e395244, type: 3}
   m_Name: BuildingSettings
   m_EditorClassIdentifier: 
-  imageAlpha: 200
+  buildingTypeValuesList:
+  - buildingType: 0
+    cost: 75
+    health: 100
+  - buildingType: 1
+    cost: 25
+    health: 40
+  - buildingType: 2
+    cost: 50
+    health: 50
+  - buildingType: 3
+    cost: 100
+    health: 100
+  extraPopulation: 5
+  goldEarnTimer: 3
+  goldEarnValue: 10

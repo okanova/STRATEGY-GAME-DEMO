@@ -1,15 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
-public class SoldierButtonView : BaseButtonView
+namespace UI.View.ButtonView
 {
-    public SoldierType soldierType;
-    [SerializeField] private RectTransform _rectTransform;
-    
-    protected override void OnButtonClick()
+    public class SoldierButtonView : BaseButtonView
     {
+        public SoldierType soldierType;
+        [SerializeField] private RectTransform _rectTransform;
+    
+        protected override void OnButtonClick()
+        {
         
+        }
     }
 }

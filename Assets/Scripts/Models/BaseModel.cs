@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseModel : MonoBehaviour
+namespace Models
 {
+    public class BaseModel : MonoBehaviour
+    {
    
+    }
 }

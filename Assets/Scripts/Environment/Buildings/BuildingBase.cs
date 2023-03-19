@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Interfaces;
+using Managers;
 using UnityEngine;
 
-public abstract class BuildingBase : MonoBehaviour
+public abstract class BuildingBase : MonoBehaviour, IGoldChanger
 {
    [SerializeField] protected NestPositionClass[] _nestPositionList;
    [SerializeField] protected Vector2 center;
    [SerializeField] protected GameObject[] _models;
-   [SerializeField] private BuildingType _type;
+   [SerializeField] private BuildingType _buildingType;
+   private int _cost;
    
    private bool _correctPoint;
 
@@ -32,17 +34,30 @@ public abstract class BuildingBase : MonoBehaviour
       
       if (_correctPoint) //SET 
       {
-         _models[0].SetActive(true);
-         _models[1].SetActive(false);
-         
-         GridManager.Instance.BuildOnCell();
-         transform.localPosition = Vector3Int.RoundToInt(transform.localPosition);
+         SetBuilding();
       }
       else //DESTROY
       {
          GridManager.Instance.ClearCellList();
          Destroy(gameObject);
       }
+   }
+
+   protected virtual void SetBuilding()
+   {
+      _models[0].SetActive(true);
+      _models[1].SetActive(false);
+         
+      GridManager.Instance.BuildOnCell();
+      transform.localPosition = Vector3Int.RoundToInt(transform.localPosition);
+      
+      foreach (var building in BuildingManager.Instance.buildingSettings.buildingTypeValuesList)
+      {
+         if (building.buildingType == _buildingType)
+            _cost = building.cost;
+      }
+
+      ChangeGold(UIManager.Instance.SourceController.SourceModel.currentMoney - _cost);
    }
 
    private IEnumerator CheckCellsSituationtRoutine()
@@ -116,7 +131,17 @@ public abstract class BuildingBase : MonoBehaviour
    
    private void OnMouseUp()
    {
-      UIManager.Instance.OpenPanel(_type);
+      UIManager.Instance.OpenPanel(_buildingType);
+   }
+
+   public bool CheckGold()
+   {
+      return true;
+   }
+
+   public void ChangeGold(int gold)
+   {
+      UIManager.Instance.GoldInvoke(gold);
    }
 }
 

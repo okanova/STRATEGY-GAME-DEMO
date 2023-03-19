@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ExitButtonView : BaseButtonView
+namespace UI.View.ButtonView
 {
-    [SerializeField] private GameObject _settingsPanel;
-    
-    
-    protected override void OnButtonClick()
+    public class ExitButtonView : BaseButtonView
     {
-        Time.timeScale = 1;
-        _settingsPanel.SetActive(false);
+        [SerializeField] private GameObject _settingsPanel;
+    
+    
+        protected override void OnButtonClick()
+        {
+            Time.timeScale = 1;
+            _settingsPanel.SetActive(false);
+        }
     }
 }

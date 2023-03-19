@@ -221,7 +221,7 @@ MonoBehaviour:
   _models:
   - {fileID: 3673737702706529213}
   - {fileID: 5750874811420410461}
-  _type: 3
+  _buildingType: 3
 --- !u!61 &3239548829912012448
 BoxCollider2D:
   m_ObjectHideFlags: 0

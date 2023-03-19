@@ -1,49 +1,49 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Cell : MonoBehaviour
+namespace Environment.Grid
 {
-    [SerializeField] private GameObject[] _cellModels;
-
-    public bool isEmpty;
-    public bool walkable;
-
-    private Color[] _colors = new Color[3];
-    public void SetFirstColor()
+    public class Cell : MonoBehaviour
     {
-        isEmpty = true;
-        walkable = true;
-        ColorDisable();
-    }
-    
-    
-    public void ColorEnable()
-    {
-        if (isEmpty)
-           OpenOneCell(1);
-        else
-            OpenOneCell(2);
-    }
+        [SerializeField] private GameObject[] _cellModels;
 
-    public void ColorRed()
-    {
-        OpenOneCell(2);
-    }
+        public bool isEmpty;
+        public bool walkable;
 
-    public void ColorDisable()
-    {
-        OpenOneCell(0);
-    }
-
-    private void OpenOneCell(int count)
-    {
-        foreach (var cell in _cellModels)
+        private Color[] _colors = new Color[3];
+        public void SetFirstColor()
         {
-            cell.SetActive(false);
+            isEmpty = true;
+            walkable = true;
+            ColorDisable();
         }
+    
+    
+        public void ColorEnable()
+        {
+            if (isEmpty)
+                OpenOneCell(1);
+            else
+                OpenOneCell(2);
+        }
+
+        public void ColorRed()
+        {
+            OpenOneCell(2);
+        }
+
+        public void ColorDisable()
+        {
+            OpenOneCell(0);
+        }
+
+        private void OpenOneCell(int count)
+        {
+            foreach (var cell in _cellModels)
+            {
+                cell.SetActive(false);
+            }
         
-        _cellModels[count].SetActive(true);
+            _cellModels[count].SetActive(true);
+        }
     }
 }

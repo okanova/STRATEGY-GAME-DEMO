@@ -1,17 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public abstract class BaseButtonView : MonoBehaviour
+namespace UI.View.ButtonView
 {
-   public void OnPointerDown()
+   public abstract class BaseButtonView : MonoBehaviour
    {
-      OnButtonClick();
+      public void OnPointerDown()
+      {
+         OnButtonClick();
+      }
+
+      protected abstract void OnButtonClick();
+
    }
-
-   protected abstract void OnButtonClick();
-
 }

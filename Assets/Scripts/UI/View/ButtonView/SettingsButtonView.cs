@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SettingsButtonView : BaseButtonView
+namespace UI.View.ButtonView
 {
-    [SerializeField] private GameObject _settingsPanel;
-    protected override void OnButtonClick()
+    public class SettingsButtonView : BaseButtonView
     {
-        if (_settingsPanel.activeSelf)
+        [SerializeField] private GameObject _settingsPanel;
+        protected override void OnButtonClick()
         {
-            _settingsPanel.SetActive(false);
-            Time.timeScale = 1;
-        }
-        else
-        {
-            _settingsPanel.SetActive(true);
-            Time.timeScale = 0;
-        }
+            if (_settingsPanel.activeSelf)
+            {
+                _settingsPanel.SetActive(false);
+                Time.timeScale = 1;
+            }
+            else
+            {
+                _settingsPanel.SetActive(true);
+                Time.timeScale = 0;
+            }
             
+        }
     }
 }

@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
-public class SoldierBase : MonoBehaviour
+namespace Soldiers
 {
-    public SoldierType soldierType;
-    [SerializeField] private GameObject _model;
+    public class SoldierBase : MonoBehaviour
+    {
+        public SoldierType soldierType;
+        [SerializeField] private GameObject _model;
+    }
 }
