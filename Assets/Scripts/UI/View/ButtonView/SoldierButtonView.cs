@@ -20,8 +20,9 @@ namespace UI.View.ButtonView
            if (!CheckPopulation()) return;
            if (!CheckGold()) return;
            
-           ChangePopulation(UIManager.Instance.SourceController.SourceModel.currentPopulation++, 
-               UIManager.Instance.SourceController.SourceModel.maxPopulation);
+           if (!isResearcher)
+                ChangePopulation(UIManager.Instance.SourceController.SourceModel.currentPopulation + 1, 
+                UIManager.Instance.SourceController.SourceModel.maxPopulation);
            
            ChangeGold(UIManager.Instance.SourceController.SourceModel.currentMoney - _cost);
 
