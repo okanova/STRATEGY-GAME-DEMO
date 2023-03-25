@@ -15,6 +15,8 @@ namespace Managers
     
         public CoordinateClass[] coordinateX = new CoordinateClass[100];
 
+        public List<Cell> cells;
+
         private List<Cell> _paintedCells = new List<Cell>();
     
         public void AddCell(Transform parent)
@@ -29,8 +31,9 @@ namespace Managers
                     tempCell.transform.SetParent(parent);
                     tempCell.transform.localPosition = new Vector2(x, y);
                     coordinateX[x].coordinateY[y] = tempCell;
-                    tempCell.SetFirstColor();
+                    tempCell.EnableCell();
                     tempCell.name = x + "_" + y;
+                    cells.Add(tempCell);
                 }
             }
         }
@@ -50,6 +53,8 @@ namespace Managers
             return false;
         }
 
+   
+
         public void NotCorrectPoint() //if every cells not empty, all cells will be red
         {
             foreach (var cell in _paintedCells)
@@ -58,13 +63,11 @@ namespace Managers
             }
         }
 
-        public void BuildOnCell()
+        public void BuildOnCell(Cell cell, bool walkable)
         {
-            foreach (var cell in _paintedCells)
-            {
-                cell.ColorDisable();
-                cell.isEmpty = false;
-            }
+            cell.ColorDisable();
+            cell.isEmpty = false;
+            cell.walkable = walkable;
         
             _paintedCells.Clear();
         }

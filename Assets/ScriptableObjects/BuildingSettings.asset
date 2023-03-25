@@ -25,6 +25,9 @@ MonoBehaviour:
   - buildingType: 3
     cost: 100
     health: 100
+  - buildingType: 3
+    cost: 100
+    health: 100
   extraPopulation: 5
   goldEarnTimer: 3
   goldEarnValue: 10

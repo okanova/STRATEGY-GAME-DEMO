@@ -14,5 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cell: {fileID: 8068769264273940712, guid: f286452dad5b8b840970836ce03a98dc, type: 3}
   coordinateCount: {x: 15, y: 15}
-  canBuildColor: {r: 0.07629752, g: 1, b: 0, a: 1}
-  cantBuildColor: {r: 1, g: 0, b: 0, a: 1}

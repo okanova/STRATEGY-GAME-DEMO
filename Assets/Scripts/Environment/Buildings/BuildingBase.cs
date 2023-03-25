@@ -47,8 +47,13 @@ public abstract class BuildingBase : MonoBehaviour, IGoldChanger
    {
       _models[0].SetActive(true);
       _models[1].SetActive(false);
-         
-      GridManager.Instance.BuildOnCell();
+
+      foreach (var cell in nestPositionList)
+      {
+         Vector2Int pos = Vector2Int.RoundToInt((Vector2) transform.localPosition + cell.nestPosition);
+         GridManager.Instance.BuildOnCell(GridManager.Instance.coordinateX[pos.x].coordinateY[pos.y], cell.walkable);
+      }
+     
       transform.localPosition = Vector3Int.RoundToInt(transform.localPosition);
       
       foreach (var building in BuildingManager.Instance.buildingSettings.buildingTypeValuesList)
