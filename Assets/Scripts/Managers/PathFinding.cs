@@ -2,60 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Environment.Grid;
+using Extensions;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Managers
 {
-    public class PathFinding : MonoBehaviour
+    public class PathFinding :  MonoSingleton<PathFinding>
     {
-        public List<Cell> _walkableList = new List<Cell>();
-        public List<Vector3> _pathTransforms = new List<Vector3>();
+        private List<Cell> _walkableList = new List<Cell>();
+        private List<Vector2> _pathTransforms = new List<Vector2>();
         
         public PathClass[] pathClass = new PathClass[1000];
         public Cell StartCell { get; private set; }
         public Cell EndCell { get; private set; }
         
-        public Transform obj;
         
-        private int c = 0;
-        
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                StartCell = GridManager.Instance.cells[Random.Range(0, GridManager.Instance.cells.Count)];
-                EndCell = GridManager.Instance.cells[Random.Range(0, GridManager.Instance.cells.Count)];
-                FindPathTransforms(StartCell, EndCell);
-                StartCoroutine(delay());
-
-            }
-
-            
-        }
-
-        IEnumerator delay()
-        {
-            yield return new WaitForSeconds(1f);
-
-            while (true)
-            {
-                obj.transform.position = Vector3.Lerp(obj.transform.position, _pathTransforms[c], 0.01f);
-
-                if (Vector3.Distance(obj.transform.position, _pathTransforms[c]) < 0.1f)
-                {
-                    c++;
-                }
-
-                yield return null;
-            }
-           
-        }
-
-        public List<Vector3> FindPathTransforms(Cell start, Cell end)
+        public List<Vector2> FindPathTransforms(Cell start, Cell end)
         {
             StartCell = start;
             EndCell = end;
+            
+            _walkableList.Clear();
+            _pathTransforms.Clear();
+            
             FindWalkableCells();
             ClearPathList();
             
