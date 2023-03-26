@@ -13,7 +13,7 @@ namespace Soldiers
     {
         public SoldierType soldierType;
         [SerializeField] private GameObject _model;
-        private List<Vector2> _targetPositions;
+        private List<Vector2> _targetPositions = new List<Vector2>();
 
         private void OnMouseUp()
         {

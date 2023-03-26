@@ -42,12 +42,10 @@ namespace UI.View.ButtonView
                        PoolManager.Instance.SoldierLevel3ButtonPool.Release(this);
                        break;
                }
-               
-              
            }
               
            else 
-               BuildingManager.Instance.CreateSoldier(soldierType);
+               SoldierManager.Instance.CreateSoldier(soldierType);
         }
         
         public bool CheckPopulation()
