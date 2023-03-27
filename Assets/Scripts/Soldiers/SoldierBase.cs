@@ -65,7 +65,7 @@ namespace Soldiers
             while (count < _targetPositions.Count)
             {
                 
-                transform.position = Vector3.Lerp(transform.position, _targetPositions[count], 0.01f);
+                transform.position = Vector3.Lerp(transform.position, _targetPositions[count], 0.1f);
 
                 if (Vector3.Distance(transform.position, _targetPositions[count]) < 0.1f)
                 {
